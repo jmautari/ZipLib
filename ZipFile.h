@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <filesystem>
 
 /**
  * \brief Provides static methods for creating, extracting, and opening zip archives.
@@ -30,7 +31,8 @@ class ZipFile
      * \param zipArchive  The zip archive to save.
      * \param zipPath     Full pathname of the zip archive file.
      */
-    static void Save(ZipArchive::Ptr zipArchive, const std::string& zipPath);
+    static void Save(ZipArchive::Ptr zipArchive,
+        const std::filesystem::path& zipPath);
 
     /**
      * \brief Saves the zip archive file and close it.
@@ -39,7 +41,8 @@ class ZipFile
      * \param zipArchive  The zip archive to save.
      * \param zipPath     Full pathname of the zip archive file.
      */
-    static void SaveAndClose(ZipArchive::Ptr zipArchive, const std::string& zipPath);
+    static void SaveAndClose(ZipArchive::Ptr zipArchive,
+        const std::filesystem::path& zipPath);
 
     /**
      * \brief Checks if file with the given path is contained in the archive.
@@ -49,7 +52,8 @@ class ZipFile
      *
      * \return  true if in archive, false if not.
      */
-    static bool IsInArchive(const std::string& zipPath, const std::string& fileName);
+    static bool IsInArchive(const std::filesystem::path& zipPath,
+        const std::string& fileName);
 
     /**
      * \brief Adds a file to the zip archive.
@@ -59,7 +63,9 @@ class ZipFile
      * \param fileName  Filename of the file to add.
      * \param level     (Optional) The level of compression. Use CompressionLevel::Stored for no compression.
      */
-    static void AddFile(const std::string& zipPath, const std::string& fileName, ICompressionMethod::Ptr method = DeflateMethod::Create());
+    static void AddFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        ICompressionMethod::Ptr method = DeflateMethod::Create());
     
     /**
      * \brief Adds a file to the zip archive.
@@ -69,7 +75,10 @@ class ZipFile
      * \param inArchiveName Final name of the file in the archive.
      * \param level         (Optional) The level of compression. Use CompressionLevel::Stored for no compression.
      */
-    static void AddFile(const std::string& zipPath, const std::string& fileName, const std::string& inArchiveName, ICompressionMethod::Ptr method = DeflateMethod::Create());
+    static void AddFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& inArchiveName,
+        ICompressionMethod::Ptr method = DeflateMethod::Create());
 
     /**
      * \brief Adds an encrypted file to the zip archive.
@@ -80,7 +89,10 @@ class ZipFile
      * \param password  The password.
      * \param level     (Optional) The level of compression. Use CompressionLevel::Stored for no compression.
      */
-    static void AddEncryptedFile(const std::string& zipPath, const std::string& fileName, const std::string& password, ICompressionMethod::Ptr method = DeflateMethod::Create());
+    static void AddEncryptedFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& password,
+        ICompressionMethod::Ptr method = DeflateMethod::Create());
 
     /**
      * \brief Adds an encrypted file to the zip archive.
@@ -91,7 +103,11 @@ class ZipFile
      * \param password      The password.
      * \param level         (Optional) The level of compression. Use CompressionLevel::Stored for no compression.
      */
-    static void AddEncryptedFile(const std::string& zipPath, const std::string& fileName, const std::string& inArchiveName, const std::string& password, ICompressionMethod::Ptr method = DeflateMethod::Create());
+    static void AddEncryptedFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& inArchiveName,
+        const std::string& password,
+        ICompressionMethod::Ptr method = DeflateMethod::Create());
 
     /**
      * \brief Extracts the file from the zip archive.
@@ -100,7 +116,8 @@ class ZipFile
      * \param zipPath   Full pathname of the zip file.
      * \param fileName  Filename of the file to extract.
      */
-    static void ExtractFile(const std::string& zipPath, const std::string& fileName);
+    static void ExtractFile(const std::filesystem::path& zipPath,
+        const std::string& fileName);
 
     /**
      * \brief Extracts the file from the zip archive.
@@ -109,7 +126,9 @@ class ZipFile
      * \param fileName        Filename of the file in the archive.
      * \param destinationPath Full pathname of the extracted file.
      */
-    static void ExtractFile(const std::string& zipPath, const std::string& fileName, const std::string& destinationPath);
+    static void ExtractFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& destinationPath);
 
     /**
      * \brief Extracts an encrypted file from the zip archive.
@@ -119,7 +138,9 @@ class ZipFile
      * \param fileName  Filename of the file to extract.
      * \param password  The password.
      */
-    static void ExtractEncryptedFile(const std::string& zipPath, const std::string& fileName, const std::string& password);
+    static void ExtractEncryptedFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& password);
 
     /**
      * \brief Extracts an encrypted file from the zip archive.
@@ -129,7 +150,10 @@ class ZipFile
      * \param destinationPath Full pathname of the extracted file.
      * \param password        The password.
      */
-    static void ExtractEncryptedFile(const std::string& zipPath, const std::string& fileName, const std::string& destinationPath, const std::string& password);
+    static void ExtractEncryptedFile(const std::filesystem::path& zipPath,
+        const std::string& fileName,
+        const std::string& destinationPath,
+        const std::string& password);
 
     /**
      * \brief Removes the file from the zip archive.
@@ -137,5 +161,6 @@ class ZipFile
      * \param zipPath   Full pathname of the zip file.
      * \param fileName  Filename of the file to remove.
      */
-    static void RemoveEntry(const std::string& zipPath, const std::string& fileName);
+    static void RemoveEntry(const std::filesystem::path& zipPath,
+        const std::string& fileName);
 };
