@@ -22,7 +22,7 @@ class ZipFile
      *
      * \return The ZipArchive instance.
      */
-    static ZipArchive::Ptr Open(const std::string& zipPath);
+    static ZipArchive::Ptr Open(const std::filesystem::path& zipPath);
 
     /**
      * \brief Saves the zip archive file with the given filename.
